@@ -1,0 +1,42 @@
+(defun c:sj ()
+  (setq	nn (getreal "请输入要计算的数：")
+	a1 (xl nn 3)
+  )
+  (setq	xn 0
+	qks 0
+  )
+  (repeat (+ a1 1)
+    (setq an (/ (* xn (+ xn 1)) 2))
+    (setq tn (xl (- nn an) 2))
+    (setq yn xn)
+    (repeat (+ 1 (- tn xn))
+      (setq bn (/ (* yn (+ yn 1)) 2))
+      (setq c1 (xl (- (- nn an) bn) 1))
+      (setq qh (+ (+ an bn) (/ (* c1 (+ c1 1)) 2)))
+      (if (= qh nn)
+	(setq qks
+	     (+	(if (= xn yn)
+		  (if (= yn c1) 1 3)
+		  (if (= yn c1)
+		    3
+		    6
+		  )
+		)
+		qks
+	     )
+	)
+      )
+      (setq yn (+ yn 1))
+    )
+    (setq xn (+ xn 1))
+  )
+  (princ "G(")
+  (princ (rtos nn))
+  (princ ")=")
+  (princ qks)
+  (princ)
+)
+
+(defun xl (n l)
+  (- (fix (/ (+ 1 (expt (+ 1 (* 8 (/ n l))) 0.5)) 2)) 1)
+)
